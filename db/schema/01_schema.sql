@@ -25,6 +25,7 @@ CREATE TABLE restaurants (
   owner_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
 
   name VARCHAR(255) NOT NULL,
+  image_url TEXT,
   country VARCHAR(50) NOT NULL,
   street VARCHAR(255) NOT NULL,
   city VARCHAR(50) NOT NULL,

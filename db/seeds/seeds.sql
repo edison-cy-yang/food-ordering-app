@@ -13,6 +13,7 @@ VALUES (1, 'edison', '6047236218'),
 INSERT INTO restaurants (
   owner_id,
   name,
+  image_url,
   country,
   street,
   city,
@@ -24,6 +25,7 @@ INSERT INTO restaurants (
 ) VALUES (
   1,
   'Five Guys',
+  'https://www.wantedinrome.com/i/preview/storage/uploads/2019/12/five-guys-rome.jpg',
   'Canada',
   '635 Robson St',
   'Vancouver',
@@ -36,6 +38,7 @@ INSERT INTO restaurants (
 (
   2,
   'McDonalds',
+  'https://www.wantedinrome.com/i/preview/storage/uploads/2019/12/five-guys-rome.jpg',
   'Canada',
   '275 Robson St',
   'Vancouver',
