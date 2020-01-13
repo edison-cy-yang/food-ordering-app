@@ -23,5 +23,13 @@ module.exports = (db) => {
           .json({ error: err.message });
       });
   });
+
+  router.get("/:name", (req, res) => {
+    const restaurant_name = req.params.name;
+    console.log(restaurant_name);
+    //TODO: Look up restaurant information from database,
+    //      find its menu, save restaurant info & menu into templateVars, and use tempalteVars in render
+    res.render("restaurant_menu");
+  })
   return router;
 };

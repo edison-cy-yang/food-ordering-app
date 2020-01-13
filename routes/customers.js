@@ -21,5 +21,10 @@ module.exports = (db) => {
           .json({ error: err.message });
       });
   });
+
+  router.post("/login", (req, res) => {
+    const restaurant_name = "five-guys";
+    res.redirect(`/restaurants/${restaurant_name}`);
+  });
   return router;
 };

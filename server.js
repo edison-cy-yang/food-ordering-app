@@ -50,6 +50,26 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
+app.get("/users/login", (req, res) => {
+  res.render("user_login");
+});
+
+app.get("/users/signup", (req, res) => {
+  res.render("user_signup");
+});
+
+app.post("/users/", (req, res) => {
+  res.redirect("/users/login");
+});
+
+app.get("/order_review", (req, res) => {
+  res.render("order_review");
+});
+
+app.get("/order_confirmation", (req, res) => {
+  res.render("order_confirmation");
+})
+
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
