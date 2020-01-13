@@ -68,7 +68,22 @@ app.get("/order_review", (req, res) => {
 
 app.get("/order_confirmation", (req, res) => {
   res.render("order_confirmation");
+});
+
+app.post("/orders", (req, res) => {
+//TODO: get order details from req.body, add order to database, then use Twilio code to send text
+
+});
+
+app.post("/orders/:id", (req, res) => {
+  const id = req.params.id;
+  //TODO: use id to find order from database, update the accepted time, send text
 })
+
+app.post("/api/sms", (req, res) => {
+  //code for twilio
+});
+
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
