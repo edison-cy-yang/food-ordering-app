@@ -50,7 +50,7 @@ INSERT INTO restaurants (
 );
 
 INSERT INTO foods (
-  restaruant_id,
+  restaurant_id,
   name,
   description,
   price,
