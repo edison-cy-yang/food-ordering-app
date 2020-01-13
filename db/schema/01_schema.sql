@@ -38,7 +38,7 @@ CREATE TABLE restaurants (
 
 CREATE TABLE foods (
   id SERIAL PRIMARY KEY,
-  restaruant_id INTEGER REFERENCES restaurants(id) ON DELETE CASCADE,
+  restaurant_id INTEGER REFERENCES restaurants(id) ON DELETE CASCADE,
 
   name VARCHAR(255) NOT NULL,
   description text,
