@@ -30,6 +30,11 @@ module.exports = (db) => {
     //TODO: Look up restaurant information from database,
     //      find its menu, save restaurant info & menu into templateVars, and use tempalteVars in render
     res.render("restaurant_menu");
-  })
+  });
+
+  router.get("/:name/portal", (req, res) => {
+    res.render("restaurant_portal");
+  });
+
   return router;
 };
