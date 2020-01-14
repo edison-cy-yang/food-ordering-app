@@ -13,19 +13,41 @@
   </head>
 
   <body>
-    <h1>Please log in or sign up!</h1>
-
-    <form class="form-inline" action="/customers/login" method="POST">
-      <div class="form-group mb-2">
-        <label for="email">Enter E-mail:</label>
-        <input class="form-control" type="email" name="email" style="width: 300px; margin: 1em">
-        <label for="password">Enter password:</label>
-        <input class="form-control" type="password" name="password" style="width: 300px; margin: 1em">
-        <button type="submit" class="btn btn-primary">Login</button>
+    <%- include('./partials/_header') %>
+    <h2>Please log in or sign up!</h2>
+    <nav>
+      <div class="nav nav-tabs" id="nav-tab" role="tablist">
+        <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#customer-login" role="tab" aria-controls="nav-home" aria-selected="true">Customer</a>
+        <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#restaurant-login" role="tab" aria-controls="nav-profile" aria-selected="false">Restaurant</a>
       </div>
-    </form>
-    <a href="/users/signup">Sign up</a>
-
+    </nav>
+    <div class="tab-content" id="login-tabContent">
+      <div class="tab-pane fade show active" id="customer-login" role="tabpanel" aria-labelledby="pills-home-tab">
+        <h3>Customer Login</h3>
+        <form action="/customers/login" method="POST">
+          <div class="form-group mb-2">
+            <label for="email">Enter E-mail:</label>
+            <input class="form-control" type="email" name="email" style="width: 300px; margin: 1em">
+            <label for="password">Enter password:</label>
+            <input class="form-control" type="password" name="password" style="width: 300px; margin: 1em">
+            <button type="submit" class="btn btn-primary">Login</button>
+          </div>
+        </form>
+        <p>Don't have an account yet? <a href="/users/signup">Sign up</a></p>
+      </div>
+      <div class="tab-pane fade" id="restaurant-login" role="tabpanel" aria-labelledby="pills-home-tab">
+        <h3>Restaurant Login</h3>
+        <form action="/customers/login" method="POST">
+          <div class="form-group mb-2">
+            <label for="email">Enter E-mail:</label>
+            <input class="form-control" type="email" name="email" style="width: 300px; margin: 1em">
+            <label for="password">Enter password:</label>
+            <input class="form-control" type="password" name="password" style="width: 300px; margin: 1em">
+            <button type="submit" class="btn btn-primary">Login</button>
+          </div>
+        </form>
+      </div>
+    </div>
     <script
       src="https://code.jquery.com/jquery-3.4.1.min.js"
       integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
