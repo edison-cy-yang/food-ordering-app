@@ -1,5 +1,5 @@
 $(document).ready(function() {
-  $('#registration-form').on('submit', function(event) {
+  $('#registration-form button').on('click', function(event) {
     event.preventDefault();
     $('.password-match-error-message').css('visibility', 'hidden');
     $('.missing-fields-error-message').css('visibility', 'hidden');
@@ -17,15 +17,8 @@ $(document).ready(function() {
       console.log("missing fields");
       $('.missing-fields-error-message').css('visibility', 'visible');
       return;
+    } else {
+      $('#registration-form').submit();
     }
-    const data = $(this).serialize();
-    $.ajax({
-      method: "POST",
-      url: "/users",
-      data
-    })
-    .then(json => {
-      console.log(json);
-    });
   });
 });
