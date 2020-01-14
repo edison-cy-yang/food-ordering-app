@@ -36,7 +36,7 @@ module.exports = (db, dbFuncs) => {
         return;
       }
       req.session.userId = user.id;
-      const restaurant_name = "five-guys";
+      const restaurant_name = "Five Guys";
       res.redirect(`/restaurants/${restaurant_name}`);
     })
     .catch(err=> {res.send(err.message)});
