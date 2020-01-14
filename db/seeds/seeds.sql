@@ -55,14 +55,16 @@ INSERT INTO foods (
   description,
   price,
   estimated_time,
-  category
+  category,
+  is_popular
 ) VALUES (
   1,
   'Little Burger',
   'Burger that is little',
   1000,
   15,
-  'entrees'
+  'entrees',
+  false
 ),
 (
   1,
@@ -70,7 +72,8 @@ INSERT INTO foods (
   'Burger that is average sized',
   1500,
   20,
-  'entrees'
+  'entrees',
+  false
 ),
 (
   1,
@@ -78,7 +81,8 @@ INSERT INTO foods (
   'Burger that is big',
   2000,
   25,
-  'entrees'
+  'entrees',
+  false
 ),
 (
   1,
@@ -86,7 +90,8 @@ INSERT INTO foods (
   'Burger that is giant',
   2500,
   30,
-  'entrees'
+  'entrees',
+  true
 ),
 (
   1,
@@ -94,7 +99,8 @@ INSERT INTO foods (
   'Burger that is super',
   3000,
   45,
-  'entrees'
+  'entrees',
+  true
 );
 
 

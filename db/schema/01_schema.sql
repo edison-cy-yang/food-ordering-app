@@ -47,7 +47,8 @@ CREATE TABLE foods (
   category VARCHAR(255) NOT NULL,
   vegetarian BOOLEAN DEFAULT FALSE,
   allergy BOOLEAN DEFAULT FALSE,
-  days_on_sale VARCHAR(50)
+  days_on_sale VARCHAR(50),
+  is_popular BOOLEAN DEFAULT FALSE
 );
 
 CREATE TABLE orders (
