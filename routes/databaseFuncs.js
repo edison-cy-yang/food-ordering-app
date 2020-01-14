@@ -1,25 +1,16 @@
 const bcrypt = require("bcrypt");
 
-const addUser = (mydb, user) => {
+const addUser = (db, user) => {
   let { email, name, phone } = user
   const pw = user.password;
   const password = bcrypt.hashSync(pw, 10);
 
-  return mydb.query(`INSERT INTO users (email, password) VALUES
+  return db.query(`INSERT INTO users (email, password) VALUES
   ($1, $2) RETURNING *;`, [email, password])
   .then(res => {
     const myUser = res.rows[0];
     console.log(myUser);
     return Promise.resolve(res.rows[0]);
-    // const user_id = myUser.id;
-    // if (myUser.is_customer) {
-    //   console.log("before insert customer");
-    //   mydb.query(`INSERT INTO customers (user_id, name, phone) VALUES ($1, $2, $3) RETURNING *;`, [user_id, name, phone])
-    //   .then(res => {
-    //     console.log("new customer: " + res.rows[0].id);
-    //     return Promise.resolve(res.rows[0]);
-    //   });
-    // }
   })
  }
 exports.addUser = addUser;
@@ -36,8 +27,8 @@ const addCustomer = (db, customer) => {
 }
 exports.addCustomer = addCustomer;
 
-const getUserWithEmail = (Db, email) => {
-  return Db.query(`
+const getUserWithEmail = (db, email) => {
+  return db.query(`
   SELECT * FROM users WHERE email = $1
   `,[email])
   .then(result => {
@@ -77,8 +68,8 @@ const getMenuForRestaurant = (db, restaurant_id) => {
 
 exports.getMenuForRestaurant = getMenuForRestaurant;
 
-const login = (myDb, em, pw) => {
-  return getUserWithEmail(myDb,em)
+const login = (db, em, pw) => {
+  return getUserWithEmail(db,em)
   .then(user => {
     if (!user) {
       return null;
@@ -92,3 +83,14 @@ const login = (myDb, em, pw) => {
 }
 
 exports.login = login;
+
+const checkDuplicate = (db, user) => {
+  let { email } = user
+  return db.query(`SELECT * FROM users WHERE email = $1`,[email])
+  .then(res => {
+    if (res.rows[0])
+      return Promise.reject('Already Exists!');
+    });
+};
+
+exports.checkDuplicate = checkDuplicate;

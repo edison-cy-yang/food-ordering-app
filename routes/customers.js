@@ -41,5 +41,12 @@ module.exports = (db, dbFuncs) => {
     })
     .catch(err=> {res.send(err.message)});
   });
+
+  router.post("/logout", (req, res) => {
+    req.session = null;
+    console.log("loggedout")
+    res.redirect("/");
+  });
+
   return router;
 };

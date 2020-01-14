@@ -17,11 +17,18 @@
   <body>
     <%- include('./partials/_header') %>
     <h1>Menu for five guys!</h1>
-    <% for (let food in menu) { %>
-      <p>name: <%= menu[food].name %></p>
-      <p>price: <%= menu[food].price %></p>
-
-    <% } %>
+    <ul>
+      <% for(let ele in menu) { %>
+        <li>
+            <strong><%= menu[ele].name %></strong>
+            <span> <%= menu[ele].description %></span>
+            <em> $<%= menu[ele].price/100 %>.00</em>
+            <% if (menu[ele].is_popular) { %>
+            <span>🔥</span>
+            <% } %>
+        </li>
+      <% } %>
+    </ul>
 
     <a class="btn btn-primary" href="/order_review">Checkout</a>
     <script
