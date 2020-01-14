@@ -9,11 +9,19 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
-    <script type="text/javascript" src="/scripts/app.js"></script>
+
+    <script>const menu = '<%- JSON.stringify(menu) %>'</script>
+    <script type="text/javascript" src="/scripts/restaurantMenu.js"></script>
   </head>
 
   <body>
+    <%- include('./partials/_header') %>
     <h1>Menu for five guys!</h1>
+    <% for (let food in menu) { %>
+      <p>name: <%= menu[food].name %></p>
+      <p>price: <%= menu[food].price %></p>
+
+    <% } %>
 
     <a class="btn btn-primary" href="/order_review">Checkout</a>
     <script

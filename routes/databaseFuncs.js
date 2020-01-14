@@ -52,6 +52,31 @@ const getUserWithEmail = (Db, email) => {
 
 exports.getUserWithEmail = getUserWithEmail;
 
+const getRestaurantWithName = (db, name) => {
+  return db.query(`SELECT *
+  FROM restaurants
+  WHERE name = $1`, [name])
+  .then(res => {
+    // console.log(res.rows);
+    return Promise.resolve(res.rows[0]);
+  });
+};
+
+exports.getRestaurantWithName = getRestaurantWithName;
+
+const getMenuForRestaurant = (db, restaurant_id) => {
+  return db.query( `SELECT foods.*
+  FROM foods
+  JOIN restaurants on foods.restaurant_id = restaurants.id
+  WHERE restaurants.id = $1;`, [restaurant_id])
+  .then(res => {
+    console.log("menu: " + res.rows);
+    return Promise.resolve(res.rows);
+  });
+};
+
+exports.getMenuForRestaurant = getMenuForRestaurant;
+
 const login = (myDb, em, pw) => {
   return getUserWithEmail(myDb,em)
   .then(user => {
