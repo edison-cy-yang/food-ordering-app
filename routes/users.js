@@ -22,9 +22,19 @@ module.exports = (db, dbFuncs) => {
     const user = req.body;
 
     dbFuncs.addUser(db, user)
+    .then(newUser => {
+      console.log("result back from addUser!!");
+      console.log("new user from route: " + newUser.id);
+      const customer = {user_id: newUser.id, name: user.name, phone: user.phone};
+      //use the user id of the new user to add new customer
+      return dbFuncs.addCustomer(db, customer);
+    })
+    .then(newCustomer => {
+      console.log("result back from addCustomer!!");
+      console.log("new customer from route: " + newCustomer.id);
+    })
     .catch(err => {
-      res.statusCode = 404;
-      res.send('error!', err.message)
+      res.send(err);
     })
     res.redirect("/users/login");
   });

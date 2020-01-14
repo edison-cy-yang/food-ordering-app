@@ -1,29 +1,40 @@
 const bcrypt = require("bcrypt");
 
 const addUser = (mydb, user) => {
-  let { email, name, is_customer, phone } = user
+  let { email, name, phone } = user
   const pw = user.password;
   const password = bcrypt.hashSync(pw, 10);
-  // name = 'asd';
-  // is_customer = true;
-  // phone = '123123123';
 
-  return mydb.query(`INSERT INTO users (email, password, is_customer) VALUES
-  ($1, $2, $3) RETURNING *;`, [email, password, is_customer])
+  return mydb.query(`INSERT INTO users (email, password) VALUES
+  ($1, $2) RETURNING *;`, [email, password])
   .then(res => {
     const myUser = res.rows[0];
-    const user_id = myUser.id;
-    console.log("user data received",user);
-    if (user.is_customer) {
-      db.query(`INSERT INTO customers (user_id, name, phone) VALUES ($1, $2, $3)`, [user_id, name, phone]);
-      console.log("user data inserted",user_id, name, phone);
-    }
-    // else {
-    //   db.query(`INSERT INTO restaurants ( ) VALUES ()`, []);
-    // };
+    console.log(myUser);
+    return Promise.resolve(res.rows[0]);
+    // const user_id = myUser.id;
+    // if (myUser.is_customer) {
+    //   console.log("before insert customer");
+    //   mydb.query(`INSERT INTO customers (user_id, name, phone) VALUES ($1, $2, $3) RETURNING *;`, [user_id, name, phone])
+    //   .then(res => {
+    //     console.log("new customer: " + res.rows[0].id);
+    //     return Promise.resolve(res.rows[0]);
+    //   });
+    // }
   })
  }
 exports.addUser = addUser;
+
+const addCustomer = (db, customer) => {
+  const user_id = customer.user_id;
+  const name = customer.name;
+  const phone = customer.phone;
+  return db.query(`INSERT INTO customers (user_id, name, phone) VALUES ($1, $2, $3) RETURNING *;`, [user_id, name, phone])
+  .then(res => {
+    console.log("new customer is: " + res.rows[0].id);
+    return Promise.resolve(res.rows[0]);
+  });
+}
+exports.addCustomer = addCustomer;
 
 const getUserWithEmail = (Db, email) => {
   return Db.query(`
