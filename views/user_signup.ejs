@@ -9,28 +9,30 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
-    <script type="text/javascript" src="/scripts/app.js"></script>
+    <script type="text/javascript" src="/scripts/userRegistration.js"></script>
   </head>
 
   <body>
     <%- include('./partials/_header') %>
     <h1>Sign up!</h1>
 
-    <form action="/users" method="POST">
+    <form id="registration-form" action="/users" method="POST">
       <div class="form-group mb-2">
         <label for="email">Enter Email:</label>
-        <input class="form-control" type="email" name="email">
+        <input class="form-control email" type="email" name="email">
         <label for="password">Enter password:</label>
-        <input class="form-control" type="password" name="password">
+        <input class="form-control password" type="password" name="password">
         <label>Re-enter password:</label>
-        <input class="form-control" type="password" name="re-enter-password">
+        <span class="password-match-error-message">password does not match!</span>
+        <input class="form-control re-enter-password" type="password" name="re-enter-password">
         <label>Name:</label>
-        <input class="form-control" type="text" name="user-name">
+        <input class="form-control user-name" type="text" name="user-name">
         <label>Phone Number:</label>
-        <input class="form-control" type="tel" name="phone">
+        <input class="form-control phone" type="tel" name="phone">
         <button type="submit" class="btn btn-primary">Sign Up</button>
       </div>
     </form>
+    <span class="missing-fields-error-message">Please make sure you filled out all the fields</span>
 
     <script
       src="https://code.jquery.com/jquery-3.4.1.min.js"

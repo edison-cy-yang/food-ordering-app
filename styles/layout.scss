@@ -11,4 +11,20 @@ body {
     width: 300px;
     margin: 1em;
   }
+
+  #registration-form {
+    .password-match-error-message {
+      color: #D8000C;
+      background-color: #FFD2D2;
+      visibility: hidden;
+    }
+
+
+  }
+
+  .missing-fields-error-message {
+    color: #D8000C;
+    background-color: #FFD2D2;
+    visibility: hidden;
+  }
  }
