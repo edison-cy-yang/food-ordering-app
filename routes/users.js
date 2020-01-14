@@ -24,7 +24,6 @@ module.exports = (db, dbFuncs) => {
     dbFuncs.addUser(db, user)
     .catch(err => {
       res.statusCode = 404;
-      res.send('error!', err.message)
     })
     res.redirect("/users/login");
   });
