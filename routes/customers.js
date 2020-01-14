@@ -8,7 +8,7 @@
 const express = require('express');
 const router  = express.Router();
 
-module.exports = (db) => {
+module.exports = (db, dbFuncs) => {
   router.get("/", (req, res) => {
     db.query(`SELECT * FROM users;`)
       .then(data => {
@@ -23,8 +23,23 @@ module.exports = (db) => {
   });
 
   router.post("/login", (req, res) => {
-    const restaurant_name = "five-guys";
-    res.redirect(`/restaurants/${restaurant_name}`);
+    const {email, password} = req.body;
+    // if (!email || !password) {
+    //   res.send('Not authorized');
+    //   return
+    // }
+    dbFuncs.login(db, email, password)
+    .then(user => {
+      if(!user) {
+        res.statusCode = 401;
+        res.send({error: 'Not authorized'});
+        return;
+      }
+      req.session.userId = user.id;
+      const restaurant_name = "five-guys";
+      res.redirect(`/restaurants/${restaurant_name}`);
+    })
+    .catch(err=> {res.send(err.message)});
   });
   return router;
 };

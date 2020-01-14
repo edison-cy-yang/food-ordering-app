@@ -25,8 +25,12 @@ module.exports = (db) => {
   });
 
   router.get("/:name", (req, res) => {
+    if (!req.session.userId) {
+      res.redirect("/users/login");
+      return;
+    }
     const restaurant_name = req.params.name;
-    console.log(restaurant_name);
+
     //TODO: Look up restaurant information from database,
     //      find its menu, save restaurant info & menu into templateVars, and use tempalteVars in render
     res.render("restaurant_menu");
