@@ -8,19 +8,7 @@
 const express = require('express');
 const router  = express.Router();
 
-module.exports = (db) => {
-  router.get("/", (req, res) => {
-    db.query(`SELECT * FROM users;`)
-      .then(data => {
-        const users = data.rows;
-        res.json({ users });
-      })
-      .catch(err => {
-        res
-          .status(500)
-          .json({ error: err.message });
-      });
-  });
+module.exports = (db, dbFuncs) => {
 
   router.get("/login", (req, res) => {
    res.render("user_login");
@@ -31,6 +19,13 @@ module.exports = (db) => {
   });
 
   router.post("/", (req, res) => {
+    const user = req.body;
+
+    dbFuncs.addUser(db, user)
+    .catch(err => {
+      res.statusCode = 404;
+      res.send('error!', err.message)
+    })
     res.redirect("/users/login");
   });
 
