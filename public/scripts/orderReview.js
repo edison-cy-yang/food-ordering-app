@@ -7,7 +7,10 @@ $(document).ready(function() {
       url: "/orders",
       method: "POST",
       data: myOrder,
-      success: function(data){console.log(data)},
+      success: function(data){
+        console.log(data);
+        $('.checkoutForm').submit();
+      },
       failure: function(errMsg) {
         alert(errMsg);
       }

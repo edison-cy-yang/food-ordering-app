@@ -48,14 +48,16 @@
         <h2>Order Summary</h2>
           <section class="summary-content">
             <ul>
-            <li class="order-detail"> <strong>Total before tax</strong> : $<%= order.total%></li>
-            <li class="order-detail"> <strong>Estimated GST/HST</strong> : $<%= order.total*0.12%></li>
-            <% const afTax = Number(order.total) + Number(order.total*0.12)%>
-            <li class="order-total"> <strong>Order Total</strong> : $<%= afTax %></li>
-          </ul>
-          <div class="checkout">
-              <a class="btn btn-primary place-order">Place order</a>
-              <div>
+              <li class="order-detail"> <strong>Total before tax</strong> : $<%= order.total%></li>
+              <li class="order-detail"> <strong>Estimated GST/HST</strong> : $<%= order.total*0.12%></li>
+              <% const afTax = Number(order.total) + Number(order.total*0.12)%>
+              <li class="order-total"> <strong>Order Total</strong> : $<%= afTax %></li>
+            </ul>
+            <div class="checkout">
+                <form class="checkoutForm" method="GET" action="/restaurants/<%= order.restaurant_info.name %>">
+                  <button type="submit" class="btn btn-primary place-order">Place order</button>
+                </form>
+            </div>
 
           </section>
         </article>
