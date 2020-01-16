@@ -3,18 +3,77 @@
   <head>
     <title>Home Page</title>
 
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
     <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
-    <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="/styles/order_review.css" type="text/css" />
+
 
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
-    <script type="text/javascript" src="/scripts/app.js"></script>
+    <script>const order = '<%- JSON.stringify(order) %>'</script>
+    <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+    <script type="text/javascript" src="/scripts/orderReview.js"></script>
   </head>
 
   <body>
-    <h1>Review your order</h1>
-    <a class="btn btn-primary">Place order</a>
+      <%- include('./partials/_header') %>
+    <main>
+
+      <div class="container">
+        <article class="shadow">
+          <h2>Restaurant Information</h2>
+          <% const res_info = order.restaurant_info %>
+          <ul class="ul-order">
+            <li> <strong>Pick up</strong>: <%= res_info.street%>, <%= res_info.city%>, <%= res_info.province%> <%= res_info.post_code%> </li>
+            <li><strong>Restaurant Hours</strong>: <%= res_info.hours%> </li>
+            <li><strong>Estmated time</strong>: <%= order.est_time%> </li>
+          </ul>
+
+
+        </article>
+        <article class="shadow">
+
+          <h2>My Iitems</h2>
+
+          <ul>
+            <% for(let key of order.food_items) { %>
+            <li class="num"> <span class="item"><%= key.name %></span><span class="numberCircle"><%= key.quantity %></span> </li>
+            <% } %>
+         </ul>
+
+        </article>
+      </div>
+      <div class="container">
+        <article class="shadow">
+        <h2>Order Summary</h2>
+          <section class="summary-content">
+            <ul>
+            <li class="order-detail"> <strong>Total before tax</strong> : $<%= order.total%></li>
+            <li class="order-detail"> <strong>Estimated GST/HST</strong> : $<%= order.total*0.12%></li>
+            <% const afTax = Number(order.total) + Number(order.total*0.12)%>
+            <li class="order-total"> <strong>Order Total</strong> : $<%= afTax %></li>
+          </ul>
+          <div class="checkout">
+              <a class="btn btn-primary place-order">Place order</a>
+              <div>
+
+          </section>
+        </article>
+      </div>
+
+
+      </main>
+
+      <footer></footer>
+
+
+
+
+
+
+
+
+
     <script
       src="https://code.jquery.com/jquery-3.4.1.min.js"
       integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="

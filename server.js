@@ -60,9 +60,36 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
+let order;
 app.get("/order_review", (req, res) => {
-  res.render("order_review");
+  const user_id = req.session.userId;
+  order['customer_id']=user_id;
+  const restaruant_id = order.restaurant_id;
+  return db.query(`SELECT * FROM restaurants WHERE id = $1;`,[restaruant_id])
+    .then(data => {
+      const restaurant = data.rows[0];
+      order['restaurant_info'] = restaurant;
+      console.log(order);
+      return Promise.resolve(order);
+      })
+      .then(order => {
+        res.render("order_review", { order });
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
 });
+
+app.post("/order_review", (req, res) => {
+  order = req.body;
+});
+
+app.post("/orders/new", (req, res) => {
+  //TODO: get order details from req.body, add order to database, then use Twilio code to send text
+    console.log("order placed!    ",req.body);
+  });
 
 app.get("/order_confirmation", (req, res) => {
   res.render("order_confirmation");
