@@ -6,7 +6,7 @@ VALUES ('edison.cy.yang@gmail.com', '$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh7
 
 INSERT INTO customers (user_id, name, phone)
 VALUES (1, 'edison', '6047236218'),
-(2, 'tim', '6041234567'),
+(2, 'tim', '6047236218'),
 (3, 'jim', '6040000000');
 
 
