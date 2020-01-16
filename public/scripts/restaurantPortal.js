@@ -69,15 +69,17 @@ $(document).ready(function() {
   </div>`;
 ////////////////////////////////////////////////
 ////////FOR INCOMING ORDERS
-  let string = `<h3 id="incoming-orders-section">Incoming orders</h3><div class="accordion" id="incoming-orders-accordion">`;
+  let string = `<h2 id="incoming-orders-section">Incoming orders</h2><div class="accordion" id="incoming-orders-accordion">`;
   for (let i = 0; i < incomingOrders.length; i++) {
     string += `<div class="card" id="${i}">
     <div class="card-header" id="heading${i}">
-      <h2 class="mb-0">
-        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse${i}" aria-expanded="true" aria-controls="collapse${i}">
-          Order number ${incomingOrders[i].order_id} by ${incomingOrders[i].customer_name} (${incomingOrders[i].phone})
+      <p class="mb-0">
+        <button class="btn" type="button" data-toggle="collapse" data-target="#collapse${i}" aria-expanded="true" aria-controls="collapse${i}">
+          <p>
+            Order number ${incomingOrders[i].order_id} by ${incomingOrders[i].customer_name} (${incomingOrders[i].phone})
+          </p>
         </button>
-      </h2>
+      </p>
     </div>
 
     <div id="collapse${i}" class="collapse show" aria-labelledby="heading${i}" data-parent="#incoming-orders-accordion">
@@ -96,15 +98,17 @@ $(document).ready(function() {
 
 //////////////
 //////FOR ACCEPTED ORDERS///////
-  string = `<h3 id="accepted-orders-section">Accepted orders</h3><div class="accordion" id="accepted-orders-accordion">`;
+  string = `<h2 id="accepted-orders-section">Accepted orders</h2><div class="accordion" id="accepted-orders-accordion">`;
   for (let i = 0; i < acceptedOrders.length; i++) {
     string += `<div class="card" id="${i}">
     <div class="card-header" id="heading${i}">
-      <h2 class="mb-0">
-        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse${i}" aria-expanded="true" aria-controls="collapse${i}">
-          Order number ${acceptedOrders[i].order_id} by ${acceptedOrders[i].customer_name} (${acceptedOrders[i].phone})
+      <p class="mb-0">
+        <button class="btn" type="button" data-toggle="collapse" data-target="#collapse${i}" aria-expanded="true" aria-controls="collapse${i}">
+          <p>
+            Order number ${acceptedOrders[i].order_id} by ${acceptedOrders[i].customer_name} (${acceptedOrders[i].phone})
+          </p>
         </button>
-      </h2>
+      </>
     </div>
 
     <div id="collapse${i}" class="collapse show" aria-labelledby="heading${i}" data-parent="#accepted-orders-accordion">
