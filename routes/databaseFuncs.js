@@ -94,3 +94,102 @@ const checkDuplicate = (db, user) => {
 };
 
 exports.checkDuplicate = checkDuplicate;
+
+const createOrder = (db, order) => {
+  const queryParams = [order.restaurant_id, order.customer_id, order.created_at, order.total_price, order.points_earned];
+  return db.query(`INSERT INTO orders (restaurant_id, customer_id, created_at, total_price, points_earned)
+  VALUES ($1, $2, $3, $4, $5) RETURNING *`, queryParams)
+  .then(res => {
+    console.log(`results from create Order: ${res.rows}`)
+    return Promise.resolve(res.rows[0]);
+  })
+  .catch(err => {
+    console.log(err);
+  });
+};
+
+exports.createOrder = createOrder;
+
+const createLineItemsForOrder = (db, order_id, foodItems) => {
+  //ASSUMING THERE IS food item in an order
+  let queryString = `INSERT INTO line_items (
+    order_id,
+    food_id,
+    quantity
+  ) VALUES `;
+  for (let item of foodItems) {
+    console.log(`name: ${item.food_id}, quantity ${item.quantity}`);
+    const insertString = `(${order_id}, ${item.food_id}, ${item.quantity}),`;
+    queryString += insertString;
+  }
+  queryString = queryString.slice(0, -1) + ' RETURNING *;';
+  console.log(queryString);
+  return db.query(queryString)
+  .then(res => {
+    console.log(`result from inserting line item: ${res.rows}`);
+    return Promise.resolve(res.rows);
+  })
+  .catch(err => {
+    console.log(err);
+  });
+};
+
+exports.createLineItemsForOrder = createLineItemsForOrder;
+
+const getCustomerNameWithId = (db, customer_id) => {
+
+}
+
+exports.getCustomerNameWithId = getCustomerNameWithId;
+
+const getOrdersForRestaurantWithName = (db, restaurant_name) => {
+  return db.query(`SELECT orders.*, customers.name as customer_name, customers.phone as phone, line_items.*, foods.name as food_name
+  FROM orders
+  JOIN restaurants ON orders.restaurant_id = restaurants.id
+  JOIN customers ON customers.id = orders.customer_id
+  JOIN line_items ON line_items.order_id = orders.id
+  JOIN foods ON line_items.food_id = foods.id
+  WHERE restaurants.name = $1;
+  `, [restaurant_name])
+  .then(res => {
+    console.log("result from selecting order for restaurant" + res.rows);
+    return Promise.resolve(res.rows);
+  })
+  .catch(err => {
+    console.log(err);
+  })
+}
+
+exports.getOrdersForRestaurantWithName = getOrdersForRestaurantWithName;
+
+const acceptOrderWithId = (db, order_id, waitTime) => {
+  console.log(`order being updated: ${order_id}`);
+  return db.query(`UPDATE orders
+  SET accepted_at = CURRENT_TIMESTAMP, estimated_time = $2
+  WHERE id = $1`, [order_id, waitTime])
+  .then(res => {
+    console.log(`result from update: ${res.rows}`);
+    return Promise.resolve(res.rows);
+  })
+  .catch(err => {
+    console.log(err);
+  })
+};
+
+exports.acceptOrderWithId = acceptOrderWithId;
+
+const completeOrderWithId = (db, order_id) => {
+  console.log(`order being completed: ${order_id}`);
+  return db.query(`UPDATE orders
+  SET completed_at = CURRENT_TIMESTAMP
+  WHERE id = $1`, [order_id])
+  .then(res => {
+    console.log(`result from update: ${res.rows}`);
+    return Promise.resolve(res.rows);
+  })
+  .catch(err => {
+    console.log(err);
+  })
+};
+
+exports.completeOrderWithId = completeOrderWithId;

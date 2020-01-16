@@ -1,0 +1,55 @@
+#orders-container {
+  padding: 20px;
+  margin: 20px;
+  font-family: ‘Ibarra Real Nova’, serif;
+  top: 30px;
+  position: relative;
+
+  form {
+    label {
+      margin: 5px;
+    }
+    select {
+      margin: 5px;
+    }
+    button {
+      margin: 5px;
+    }
+  }
+
+  .collapse {
+    padding: 10px;
+    // display: flex;
+    // justify-content: space-between;
+  }
+
+  .order-body {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  ul {
+    list-style: none;
+  }
+
+  #incoming-orders-accordion {
+    margin: 10px;
+    .wait-time-form {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+
+  #accepted-orders-accordion {
+    margin: 10px;
+  }
+}
+
+nav.orders-nav {
+  position: fixed;
+  z-index: 1;
+}
+
+html {
+  scroll-behavior: smooth;
+}

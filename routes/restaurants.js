@@ -8,6 +8,7 @@
 const express = require('express');
 const router  = express.Router();
 const database = require('./databaseFuncs');
+const util = require('util');
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
@@ -52,7 +53,60 @@ module.exports = (db) => {
   });
 
   router.get("/:name/portal", (req, res) => {
-    res.render("restaurant_portal");
+    /*TODO: get restaurant id with name
+    //find all the orders associated with the restaurant,
+    //with each order
+    1. Find the name of the customer that made the order
+    2. find all the line items inside the order, save theses two info to templateVars
+    // templateVars = {orders: [
+      {order_id: id, customer_name: customer_name, line_items: [{food_id: 1, food_name: 'burger', quantity: 3}, {}, ...]}
+    ]}
+    */
+
+    database.getOrdersForRestaurantWithName(db, "Five Guys")
+    .then(orders => {
+      console.log(`result back from getOrdersForRestaurantWithName: ${orders.length}`);
+      for (const order of orders) {
+        // console.log(util.inspect(order, {depth:null}));
+      }
+      //order the result to be an array or orders, each order contains an array of food items
+      let map = {};
+      for (let order of orders) {
+        if (!map[order.order_id]) {
+          const item = {
+            food_name: order.food_name,
+            quantity: order.quantity
+          };
+          map[order.order_id] = {
+            order_id: order.order_id,
+            customer_name: order.customer_name,
+            phone: order.phone,
+            created_at: order.created_at,
+            accepted_at: order.accepted_at,
+            completed_at: order.completed_at,
+            pickedup_at: order.pickedup_at,
+            food_items: [item]
+          };
+        } else {
+          const item = {
+            food_name: order.food_name,
+            quantity: order.quantity
+          };
+          map[order.order_id].food_items.push(item);
+        }
+      }
+      console.log(util.inspect(Object.values(map), {depth:null}));
+      const groupedOrders = Object.values(map);
+      const templateVars = {orders: groupedOrders};
+      res.render("restaurant_portal", templateVars);
+    })
+    .catch(err => {
+      console.log(err);
+    })
+
+    //database.getCustomerNameWithId();
+
+
   });
 
   return router;

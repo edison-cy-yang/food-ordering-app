@@ -10,7 +10,8 @@ const sass       = require("node-sass-middleware");
 const app        = express();
 const morgan     = require('morgan');
 const cookieSession = require("cookie-session");
-const databaseFuncs = require("./routes/databaseFuncs")
+const database = require("./routes/databaseFuncs");
+const twilio = require('./twilio');
 
 // PG database client/connection setup
 const { Pool } = require('pg');
@@ -46,9 +47,9 @@ const usersRoutes = require("./routes/users");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
-app.use("/customers", customersRoutes(db, databaseFuncs));
-app.use("/restaurants", restaurantsRoutes(db, databaseFuncs));
-app.use("/users", usersRoutes(db, databaseFuncs));
+app.use("/customers", customersRoutes(db, database));
+app.use("/restaurants", restaurantsRoutes(db, database));
+app.use("/users", usersRoutes(db, database));
 // Note: mount other resources here, using the same pattern above
 
 
@@ -69,13 +70,59 @@ app.get("/order_confirmation", (req, res) => {
 
 app.post("/orders", (req, res) => {
 //TODO: get order details from req.body, add order to database, then use Twilio code to send text
+  // const order = req.body.order;
+  // const foodItems = req.body.foodItems
 
+  const order = {restaurant_id: 1, customer_id: 1, created_at: "2020-02-12T08:08:40.000Z", total_price: 1000, points_earned: 10};
+  const foodItems = [{food_id: 1, quantity: 1}, {food_id: 2, quantity: 2}];
+
+  //call database to insert one order
+  database.createOrder(db, order)
+  .then(order => {
+    console.log(`order id: ${order.id}`);
+    return database.createLineItemsForOrder(db, order.id, foodItems)
+  })
+  .then(lineItems => {
+    for (let item of lineItems) {
+      console.log(`items: ${item.id}`);
+    }
+
+    twilio.sendRestaurantMessage();
+    res.redirect("/restaurants/Five Guys");
+  })
+  .catch(err => {
+    console.log(err);
+  });
 });
 
-app.post("/orders/:id", (req, res) => {
+app.post("/orders/:id/accept", (req, res) => {
   const id = req.params.id;
-  //TODO: use id to find order from database, update the accepted time, send text
-})
+  //call database.acceptOrder(db, order_id)
+  const waitTime = Number(req.body.waitTime);
+  const phone = req.body.phone;
+  const name = req.body.name;
+  console.log(phone);
+  console.log(name);
+  database.acceptOrderWithId(db, id, waitTime)
+  .then(result => {
+    console.log("result back from databaseFuncs" + result);
+    //get customer phone
+
+    ////SEND TEXT to cusomter
+    twilio.sendCustomerMessage(name, phone, waitTime);
+    res.status(201).send();
+  });
+});
+
+app.post("/orders/:id/complete", (req, res) => {
+  const id = req.params.id;
+  //call database.completeOrder(db, order_id)
+  database.completeOrderWithId(db, id)
+  .then(result => {
+    console.log("result back from databaseFuncs" + result);
+    res.status(201).send();
+  });
+});
 
 app.post("/api/sms", (req, res) => {
   //code for twilio
