@@ -100,8 +100,11 @@ app.post("/orders", (req, res) => {
   // const order = req.body.order;
   // const foodItems = req.body.foodItems
 
-  const order = {restaurant_id: 1, customer_id: 1, created_at: "2020-02-12T08:08:40.000Z", total_price: 1000, points_earned: 10};
-  const foodItems = [{food_id: 1, quantity: 1}, {food_id: 2, quantity: 2}];
+  // const order = {restaurant_id: 1, customer_id: 1, created_at: "2020-02-12T08:08:40.000Z", total_price: 1000, points_earned: 10};
+  // const foodItems = [{food_id: 1, quantity: 1}, {food_id: 2, quantity: 2}];
+
+  const order = {restaurant_id: req.body.restaurant_id, customer_id: req.body.customer_id, total_price: req.body.total};
+  const foodItems = req.body.food_items;
 
   //call database to insert one order
   database.createOrder(db, order)

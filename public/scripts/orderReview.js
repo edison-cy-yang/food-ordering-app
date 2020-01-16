@@ -4,7 +4,7 @@ $(document).ready(function() {
   $(".place-order").on("click", function(event) {
     // event.preventDefault();
     $.ajax({
-      url: "/orders/new",
+      url: "/orders",
       method: "POST",
       data: myOrder,
       success: function(data){console.log(data)},

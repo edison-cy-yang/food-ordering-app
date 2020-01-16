@@ -96,9 +96,9 @@ const checkDuplicate = (db, user) => {
 exports.checkDuplicate = checkDuplicate;
 
 const createOrder = (db, order) => {
-  const queryParams = [order.restaurant_id, order.customer_id, order.created_at, order.total_price, order.points_earned];
+  const queryParams = [order.restaurant_id, order.customer_id, order.total_price];
   return db.query(`INSERT INTO orders (restaurant_id, customer_id, created_at, total_price, points_earned)
-  VALUES ($1, $2, $3, $4, $5) RETURNING *`, queryParams)
+  VALUES ($1, $2, CURRENT_TIMESTAMP, $3, 10) RETURNING *`, queryParams)
   .then(res => {
     console.log(`results from create Order: ${res.rows}`)
     return Promise.resolve(res.rows[0]);
@@ -118,8 +118,8 @@ const createLineItemsForOrder = (db, order_id, foodItems) => {
     quantity
   ) VALUES `;
   for (let item of foodItems) {
-    console.log(`name: ${item.food_id}, quantity ${item.quantity}`);
-    const insertString = `(${order_id}, ${item.food_id}, ${item.quantity}),`;
+    console.log(`name: ${item.id}, quantity ${item.quantity}`);
+    const insertString = `(${order_id}, ${item.id}, ${item.quantity}),`;
     queryString += insertString;
   }
   queryString = queryString.slice(0, -1) + ' RETURNING *;';
