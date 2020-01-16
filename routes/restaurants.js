@@ -8,6 +8,7 @@
 const express = require('express');
 const router  = express.Router();
 const database = require('./databaseFuncs');
+const dbFuncs = require('./databaseFuncs');
 const util = require('util');
 
 module.exports = (db) => {
@@ -107,6 +108,26 @@ module.exports = (db) => {
     //database.getCustomerNameWithId();
 
 
+  });
+
+  router.post("/login", (req, res) => {
+    const {email, password} = req.body;
+    // if (!email || !password) {
+    //   res.send('Not authorized');
+    //   return
+    // }
+    dbFuncs.login(db, email, password)
+    .then(user => {
+      if(!user) {
+        res.statusCode = 401;
+        res.send({error: 'Not authorized'});
+        return;
+      }
+      req.session.userId = user.id;
+      const restaurant_name = "Five Guys";
+      res.redirect(`/restaurants/${restaurant_name}/portal`);
+    })
+    .catch(err=> {res.send(err.message)});
   });
 
   return router;
