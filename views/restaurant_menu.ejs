@@ -3,34 +3,140 @@
   <head>
     <title>Home Page</title>
 
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
     <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
     <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="/styles/menu.css" type="text/css" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Archivo+Black|Merriweather&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Ibarra+Real+Nova|Oswald&display=swap" rel="stylesheet">
 
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
-
     <script>const menu = '<%- JSON.stringify(menu) %>'</script>
-    <script type="text/javascript" src="/scripts/restaurantMenu.js"></script>
+    <script type="text/javascript" src="../scripts/restaurantMenu.js"></script>
+
+
   </head>
 
   <body>
-    <%- include('./partials/_header') %>
-    <h1>Menu for five guys!</h1>
-    <ul>
-      <% for(let ele in menu) { %>
-        <li>
-            <strong><%= menu[ele].name %></strong>
-            <span> <%= menu[ele].description %></span>
-            <em> $<%= menu[ele].price/100 %>.00</em>
-            <% if (menu[ele].is_popular) { %>
-            <span>🔥</span>
-            <% } %>
-        </li>
-      <% } %>
-    </ul>
 
-    <a class="btn btn-primary" href="/order_review">Checkout</a>
+    <%- include('./partials/_header') %>
+
+  <main>
+  <div class = "container1">
+
+
+    <section class = "red-section">
+
+      <span class = "caption1">Handcrafted</span>
+      <span class = "caption2">BURGERS & FRIES</span>
+      <span class = "caption1">since 1986</span>
+      <span class = "menu-text">MENU</span>
+      <a href="#menu"><i class="material-icons arrow-down">
+keyboard_arrow_down
+</i></a>
+     </section>
+
+    <div class = "main-section">
+
+      <div id="menu" class = "menu-section shadow">
+        <p class="category"> Entrees </p>
+        <ul>
+          <% for(let food of menu) { %>
+            <li>
+              <div class = "each-item">
+                <div class = "food-item">
+                <strong class="food-name"><%= food.name %></strong>
+                <em> $<%= food.price/100 %>.00</em>
+                <% if (food.is_popular) { %>
+                <span>🔥</span>
+                <% } %>
+                <p class="item-description"> <%= food.description %></p>
+              </div>
+                <div class="def-number-input number-input safari_only">
+                  <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" class="minus quant-button"></button>
+                  <input class="quantity <%= food.id %>" min="0" name="<%= food.id %>-quantity" value="0" type="number">
+                  <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus quant-button"></button>
+                </div>
+              </div>
+            </li>
+          <% } %>
+        </ul>
+    </div>
+
+
+    <div id="menu3" class = "menu-section shadow">
+        <p class="category"> Beverages </p>
+        <ul>
+          <% for(let food of menu) { %>
+            <li>
+              <div class = "each-item">
+                <div class = "food-item">
+                <strong class="food-name"><%= food.name %></strong>
+                <em> $<%= food.price/100 %>.00</em>
+                <% if (food.is_popular) { %>
+                <span>🔥</span>
+                <% } %>
+                <p class="item-description"> <%= food.description %></p>
+              </div>
+                <div class="def-number-input number-input safari_only">
+                  <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" class="minus quant-button"></button>
+                  <input class="quantity <%= food.id %>" min="0" name="<%= food.id %>-quantity" value="0" type="number">
+                  <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus quant-button"></button>
+                </div>
+              </div>
+            </li>
+          <% } %>
+        </ul>
+    </div>
+
+
+    <div id="menu2" class = "menu-section shadow">
+        <p class="category"> Sides </p>
+        <ul>
+          <% for(let food of menu) { %>
+            <li>
+              <div class = "each-item">
+                <div class = "food-item">
+                <strong class="food-name"><%= food.name %></strong>
+                <em> $<%= food.price/100 %>.00</em>
+                <% if (food.is_popular) { %>
+                <span>🔥</span>
+                <% } %>
+                <p class="item-description"> <%= food.description %></p>
+              </div>
+                <div class="def-number-input number-input safari_only">
+                  <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" class="minus quant-button"></button>
+                  <input class="quantity <%= food.id %>" min="0" name="<%= food.id %>-quantity" value="0" type="number">
+                  <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus quant-button"></button>
+                </div>
+              </div>
+            </li>
+          <% } %>
+        </ul>
+    </div>
+
+
+
+
+
+  </div>
+  </div>
+ </main>
+<div class="fixed-bottom cart-section shadow-lg p-3 mb-5 bg-white rounded">
+    <p class="cart-title">My items</p>
+ <div class="cart">
+</div>
+<div class="buttons">
+  <a class="btn btn-primary checkout" href="/order_review">Checkout</a>
+  </div>
+</div>
+  <a class="btn btn-primary fixed-bottom open-cart"><i style="color:white;" class="material-icons cart-icon">
+shopping_cart
+</i></a>
+
     <script
       src="https://code.jquery.com/jquery-3.4.1.min.js"
       integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
