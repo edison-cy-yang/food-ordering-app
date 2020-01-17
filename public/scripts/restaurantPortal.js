@@ -28,18 +28,18 @@ $(document).ready(function() {
     <div class="wait-time-form">
       <label for="waitTime">Estimated wait time: </label>
       <select class="form-control" id="waitTime">
-        <option selected="selected" value="0">5</option>
-        <option value="1">10</option>
-        <option value="2">15</option>
-        <option value="3">20</option>
-        <option value="4">25</option>
-        <option value="5">30</option>
-        <option value="6">35</option>
-        <option value="7">40</option>
-        <option value="8">45</option>
-        <option value="9">50</option>
-        <option value="10">55</option>
-        <option value="11">60</option>
+        <option selected="selected" value="0">15 Minutes</option>
+        <option value="1">30 Minutes</option>
+        <option value="2">45 Minutes</option>
+        <option value="3">1 Hour</option>
+        <option value="4">1 Hour 15 Minutes</option>
+        <option value="5">1 Hour 30 Minutes</option>
+        <option value="6">1 Hour 45 Minutes</option>
+        <option value="7">2 Hours</option>
+        <option value="8">2 Hours 15 Minutes</option>
+        <option value="9">2 Hours 30 minutes</option>
+        <option value="10">2 Hours 45 minutes</option>
+        <option value="11">3 Hours</option>
       </select>`;
 
 ///////////////////Unused, for reference//////
@@ -79,14 +79,15 @@ $(document).ready(function() {
           <p>
             Order number ${incomingOrders[i].order_id} by ${incomingOrders[i].customer_name} (${incomingOrders[i].phone})
           </p>
+          <span class="estimated-time">Estimated preparation time: ${incomingOrders[i].estimated_time}</span>
         </button>
       </p>
     </div>
 
     <div id="collapse${i}" class="collapse show" aria-labelledby="heading${i}" data-parent="#incoming-orders-accordion">
       <div class="order-body">
-        <div class="card-body">
-          <ul>
+          <div class="card-body">
+            <ul>
     `;
     const order = incomingOrders[i];
     for (let j = 0; j < order.food_items.length; j++) {
@@ -109,6 +110,7 @@ $(document).ready(function() {
           <p>
             Order number ${acceptedOrders[i].order_id} by ${acceptedOrders[i].customer_name} (${acceptedOrders[i].phone})
           </p>
+          <span class="estimated-time">Estimated preparation time: ${acceptedOrders[i].estimated_time}</span>
         </button>
       </>
     </div>
@@ -155,9 +157,9 @@ $(document).ready(function() {
   ///////////////////////////////////////
 
 
-  let selected = '5';
+  let selected = '15 minutes';
 
-  $('#SpaceAccommodation').change(function () {
+  $('#waitTime').change(function () {
     selected = $(this).find("option:selected").text();
   });
 

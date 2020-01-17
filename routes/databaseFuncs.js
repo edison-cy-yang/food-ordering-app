@@ -96,9 +96,9 @@ const checkDuplicate = (db, user) => {
 exports.checkDuplicate = checkDuplicate;
 
 const createOrder = (db, order) => {
-  const queryParams = [order.restaurant_id, order.customer_id, order.total_price];
-  return db.query(`INSERT INTO orders (restaurant_id, customer_id, created_at, total_price, points_earned)
-  VALUES ($1, $2, CURRENT_TIMESTAMP, $3, 10) RETURNING *`, queryParams)
+  const queryParams = [order.restaurant_id, order.customer_id, order.total_price, order.estimated_time];
+  return db.query(`INSERT INTO orders (restaurant_id, customer_id, created_at, total_price, points_earned, estimated_time)
+  VALUES ($1, $2, CURRENT_TIMESTAMP, $3, 10, $4) RETURNING *`, queryParams)
   .then(res => {
     console.log(`results from create Order: ${res.rows}`)
     return Promise.resolve(res.rows[0]);
