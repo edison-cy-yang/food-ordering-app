@@ -19,6 +19,15 @@ module.exports = (db, dbFuncs) => {
     })
   });
 
+  router.get("/signup", (req, res) => {
+    const user_id = req.session.userId;
+    return dbFuncs.getCustomerWithId(db, user_id)
+    .then(result => {
+      const user = result
+      res.render("user_signup",{ user });
+    })
+  });
+
   router.post("/", (req, res) => {
     const user = req.body;
 

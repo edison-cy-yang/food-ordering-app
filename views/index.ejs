@@ -27,8 +27,15 @@
           <span class = "invisible show2 caption2">JAY & EDISON</span>
           <span class = "invisible show5 caption1">since yesterday...</span>
           <span class = "invisible show3 menu-text">Get Started</span>
-        <a class = "invisible show3 get-started" href="/users/login">
-          <img class="finger" src="/images/start.png" alt=""></a>
+
+          <% if(!user) {%>
+            <a class = "invisible show3 get-started" href="/users/login">
+              <img class="finger" src="/images/start.png" alt=""></a>
+            <% } else {%>
+            <a class = "invisible show3 get-started" href="/restaurants/Five%20Guys">
+              <img class="finger" src="/images/start.png" alt=""></a>
+              <% } %>
+
           <div class="invisible show4 icons">
             <a href="" class = "click-icon"><img src="/images/facebook.png" alt=""  ></a>
             <a href="" class = "click-icon"><img src="/images/instagram.png" alt="" ></a>

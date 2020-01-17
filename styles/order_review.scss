@@ -46,9 +46,14 @@ ul {
   padding:30px;
   padding-bottom: 40px;
   padding-top: 15px;
-  border-bottom: 2px solid black
+  border-bottom: 2px solid black;
+  li {
+    line-height: 40px;
+  }
 }
-
+.order-detail {
+  line-height: 35px;
+}
 .num {
   display:flex;
   justify-content: space-between;
