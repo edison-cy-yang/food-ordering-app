@@ -71,7 +71,8 @@ $(document).ready(function() {
 ////////FOR INCOMING ORDERS
   let string = `<h2 id="incoming-orders-section">Incoming orders</h2><div class="accordion" id="incoming-orders-accordion">`;
   for (let i = 0; i < incomingOrders.length; i++) {
-    string += `<div class="card" id="${i}">
+    string += `
+    <div class="card incoming-card" id="${i}">
     <div class="card-header" id="heading${i}">
       <p class="mb-0">
         <button class="btn" type="button" data-toggle="collapse" data-target="#collapse${i}" aria-expanded="true" aria-controls="collapse${i}">
@@ -100,7 +101,8 @@ $(document).ready(function() {
 //////FOR ACCEPTED ORDERS///////
   string = `<h2 id="accepted-orders-section">Accepted orders</h2><div class="accordion" id="accepted-orders-accordion">`;
   for (let i = 0; i < acceptedOrders.length; i++) {
-    string += `<div class="card" id="${i}">
+    string += `
+    <div class="card accepted-card" id="${i}">
     <div class="card-header" id="heading${i}">
       <p class="mb-0">
         <button class="btn" type="button" data-toggle="collapse" data-target="#collapse${i}" aria-expanded="true" aria-controls="collapse${i}">
@@ -177,11 +179,13 @@ $(document).ready(function() {
     }).then(function() {
       console.log(`div#${event.target.id}.card`);
 
-      $(`div#${event.target.id}.card`).fadeOut("slow", function() {
+      $(`div#${event.target.id}.card.incoming-card`).fadeOut("slow", function() {
         event.stopPropagation();
-        const card = $(`div#${event.target.id}.card`).html();
-        console.log(card);
-        $('#accepted-orders-accordion').append(card).fadeIn(3000);
+        const $card = $(this);
+        console.log("card is: ");
+        console.log($card);
+        $('#accepted-orders-accordion').append($card);
+        $card.fadeIn(3000);
         //remove order from incomingorders, add to accepted, change the class of the accept button to complete
         // acceptedOrders.push(incomingOrders[event.target.id]);
         // incomingOrders.splice(event.target.id, 1);
