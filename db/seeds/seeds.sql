@@ -62,7 +62,7 @@ INSERT INTO foods (
   'Little Burger',
   'Burger that is little',
   1000,
-  15,
+  5,
   'entrees',
   false
 ),
@@ -71,7 +71,7 @@ INSERT INTO foods (
   'Average Burger',
   'Burger that is average sized',
   1500,
-  20,
+  5,
   'entrees',
   false
 ),
@@ -80,7 +80,7 @@ INSERT INTO foods (
   'Big Burger',
   'Burger that is big',
   2000,
-  25,
+  10,
   'entrees',
   false
 ),
@@ -89,7 +89,7 @@ INSERT INTO foods (
   'Giant Burger',
   'Burger that is giant',
   2500,
-  30,
+  10,
   'entrees',
   true
 ),
@@ -98,7 +98,7 @@ INSERT INTO foods (
   'Super Burger',
   'Burger that is super',
   3000,
-  45,
+  10,
   'entrees',
   true
 );
