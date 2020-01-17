@@ -5,17 +5,36 @@
 
     <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
     <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
-    <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/root.css" type="text/css" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="/styles/root.css" type="text/css" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Archivo+Black|Merriweather&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Ibarra+Real+Nova|Oswald&display=swap" rel="stylesheet">
 
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <script type="text/javascript" src="/scripts/app.js"></script>
   </head>
 
   <body>
-    <h1>Hello World!</h1>
+      <%- include('./partials/_header') %>
 
-    <a class="btn btn-primary" href="/users/login">Get Started!</a>
+      <section class = "red-section shadow">
+
+          <span class = "caption1">Order your food</span>
+          <span class = "caption2">JAY & EDISON</span>
+          <span class = "caption1">since 2020</span>
+          <span class = "menu-text">Get Started</span>
+        <a class = "get-started" href="/users/login">
+          <img class="finger" src="/images/start.png" alt=""></a>
+          <div class="icons">
+            <a href="" class = "click-icon"><img src="/images/facebook.png" alt=""  ></a>
+            <a href="" class = "click-icon"><img src="/images/instagram.png" alt="" ></a>
+            <a href="" class = "click-icon"><img src="/images/twitter.png" alt="" ></a>
+            <a href="" class = "click-icon"><img src="/images/github.png" alt="" ></a>
+          </div>
+         </section>
     <script
       src="https://code.jquery.com/jquery-3.4.1.min.js"
       integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
