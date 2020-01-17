@@ -86,6 +86,7 @@ module.exports = (db) => {
             accepted_at: order.accepted_at,
             completed_at: order.completed_at,
             pickedup_at: order.pickedup_at,
+            estimated_time: order.estimated_time,
             food_items: [item]
           };
         } else {

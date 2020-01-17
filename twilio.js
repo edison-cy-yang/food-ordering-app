@@ -19,7 +19,7 @@ const sendCustomerMessage = function(name, phone, waitTime) {
   console.log("sending message...");
   client.messages
     .create({
-      body: `Hi ${name}, your order has been accepted! Estimated wait time: ${waitTime} minutes`,
+      body: `Hi ${name}, your order has been accepted! Estimated wait time: ${waitTime}`,
       from: twilio.phoneNumber,
       to: phone
     })

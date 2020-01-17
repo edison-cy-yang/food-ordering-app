@@ -104,10 +104,10 @@ INSERT INTO foods (
 );
 
 
-INSERT INTO orders (restaurant_id, customer_id, created_at, total_price, points_earned)
-VALUES (1, 1, '2018-02-12T08:08:40.000Z', 1000, 10),
-(1, 2, '2018-02-12T08:08:40.000Z', 1200, 12),
-(1, 1, '2018-02-12T08:08:40.000Z', 1500, 15);
+INSERT INTO orders (restaurant_id, customer_id, created_at, total_price, points_earned, estimated_time)
+VALUES (1, 1, '2018-02-12T08:08:40.000Z', 1000, 10, '30 minutes'),
+(1, 2, '2018-02-12T08:08:40.000Z', 1200, 12, '20 minutes'),
+(1, 1, '2018-02-12T08:08:40.000Z', 1500, 15, '1 hour(s) 10 minute(s)');
 
 
 INSERT INTO line_items (

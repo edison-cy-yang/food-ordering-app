@@ -103,7 +103,7 @@ app.post("/orders", (req, res) => {
   // const order = {restaurant_id: 1, customer_id: 1, created_at: "2020-02-12T08:08:40.000Z", total_price: 1000, points_earned: 10};
   // const foodItems = [{food_id: 1, quantity: 1}, {food_id: 2, quantity: 2}];
 
-  const order = {restaurant_id: req.body.restaurant_id, customer_id: req.body.customer_id, total_price: req.body.total};
+  const order = {restaurant_id: req.body.restaurant_id, customer_id: req.body.customer_id, total_price: req.body.total, estimated_time: req.body.est_time};
   const foodItems = req.body.food_items;
 
   //call database to insert one order
@@ -128,11 +128,12 @@ app.post("/orders", (req, res) => {
 app.post("/orders/:id/accept", (req, res) => {
   const id = req.params.id;
   //call database.acceptOrder(db, order_id)
-  const waitTime = Number(req.body.waitTime);
+  const waitTime = req.body.waitTime;
   const phone = req.body.phone;
   const name = req.body.name;
   console.log(phone);
   console.log(name);
+  console.log("estimated time: " + req.body.waitTime);
   database.acceptOrderWithId(db, id, waitTime)
   .then(result => {
     console.log("result back from databaseFuncs" + result);

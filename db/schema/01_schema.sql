@@ -61,7 +61,7 @@ CREATE TABLE orders (
   pickedup_at TIMESTAMP,
   total_price INTEGER NOT NULL,
   points_earned INTEGER NOT NULL,
-  estimated_time INTEGER
+  estimated_time VARCHAR(100)
 );
 
 CREATE TABLE line_items (
