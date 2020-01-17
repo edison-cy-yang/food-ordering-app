@@ -46,7 +46,7 @@ $(document).ready(function() {
   const accordionString = `
   <div class="accordion" id="accordionExample">
     <% for (const order of orders) { %>
-      <div class="card">
+      <div class="card shadow">
         <div class="card-header" id="headingOne">
           <h2 class="mb-0">
             <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
@@ -72,7 +72,7 @@ $(document).ready(function() {
   let string = `<h2 id="incoming-orders-section">Incoming orders</h2><div class="accordion" id="incoming-orders-accordion">`;
   for (let i = 0; i < incomingOrders.length; i++) {
     string += `
-    <div class="card incoming-card" id="${i}">
+    <div class="card shadow incoming-card" id="${i}">
     <div class="card-header" id="heading${i}">
       <p class="mb-0">
         <button class="btn" type="button" data-toggle="collapse" data-target="#collapse${i}Incoming" aria-expanded="true" aria-controls="collapse${i}Incoming">
@@ -103,7 +103,7 @@ $(document).ready(function() {
   string = `<h2 id="accepted-orders-section">Accepted orders</h2><div class="accordion" id="accepted-orders-accordion">`;
   for (let i = 0; i < acceptedOrders.length; i++) {
     string += `
-    <div class="card accepted-card" id="${i}">
+    <div class="card shadow accepted-card" id="${i}">
     <div class="card-header" id="heading${i}">
       <p class="mb-0">
         <button class="btn" type="button" data-toggle="collapse" data-target="#collapse${i}" aria-expanded="true" aria-controls="collapse${i}">
@@ -135,7 +135,7 @@ $(document).ready(function() {
   string = `<h2 id="completed-orders-section">Completed orders</h2><div class="accordion" id="completed-orders-accordion">`;
   for (let i = 0; i < completedOrders.length; i++) {
     string +=
-    `<div class="card completed-card" id="${i}">
+    `<div class="card shadow completed-card" id="${i}">
     <div class="card-header" id="heading${i}">
       <p class="mb-0">
         <button class="btn" type="button" data-toggle="collapse" data-target="#collapse${i}" aria-expanded="true" aria-controls="collapse${i}">
@@ -242,13 +242,10 @@ $(document).ready(function() {
     $.ajax({
       url: "/customers/logout",
       method: "POST",
-      success: function(data){console.log(data)},
+      success: function(data){location.reload()},
       failure: function(errMsg) {
         alert(errMsg);
       }
     });
-    setTimeout(() => {
-      location.reload();
-     });
    });
 });

@@ -10,13 +10,10 @@ $(document).ready(function() {
     $.ajax({
       url: "/customers/logout",
       method: "POST",
-      success: function(data){console.log(data)},
+      success: function(data){location.reload()},
       failure: function(errMsg) {
         alert(errMsg);
       }
     });
-    setTimeout(() => {
-      location.reload();
-     });
    });
 });
