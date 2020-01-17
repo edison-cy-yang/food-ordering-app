@@ -75,7 +75,7 @@ $(document).ready(function() {
     <div class="card incoming-card" id="${i}">
     <div class="card-header" id="heading${i}">
       <p class="mb-0">
-        <button class="btn" type="button" data-toggle="collapse" data-target="#collapse${i}" aria-expanded="true" aria-controls="collapse${i}">
+        <button class="btn" type="button" data-toggle="collapse" data-target="#collapse${i}Incoming" aria-expanded="true" aria-controls="collapse${i}Incoming">
           <p>
             Order number ${incomingOrders[i].order_id} by ${incomingOrders[i].customer_name} (${incomingOrders[i].phone})
           </p>
@@ -84,7 +84,7 @@ $(document).ready(function() {
       </p>
     </div>
 
-    <div id="collapse${i}" class="collapse show" aria-labelledby="heading${i}" data-parent="#incoming-orders-accordion">
+    <div id="collapse${i}Incoming" class="collapse show" aria-labelledby="heading${i}" data-parent="#incoming-orders-accordion">
       <div class="order-body">
           <div class="card-body">
             <ul>
@@ -116,14 +116,15 @@ $(document).ready(function() {
     </div>
 
     <div id="collapse${i}" class="collapse show" aria-labelledby="heading${i}" data-parent="#accepted-orders-accordion">
-      <div class="card-body">
-        <ul>
+      <div class="order-body">
+        <div class="card-body">
+            <ul>
     `;
     const order = acceptedOrders[i];
     for (let j = 0; j < order.food_items.length; j++) {
       string += `<li>${order.food_items[j].food_name}: ${order.food_items[j].quantity}</li>`;
     }
-    string += `</ul></div></div></div>`;
+    string += `</ul></div><button class="btn btn-primary complete" id="${i}">Complete</button></div></div></div>`;
   }
 
   $('#orders-container').append(string);
@@ -131,29 +132,32 @@ $(document).ready(function() {
   ////////////////////////////////////////////////
 
   /////////////for completed orders///////
-  // string = `<h3 id="completed-orders-section">Completed orders</h3><div class="accordion" id="completed-orders-accordion">`;
-  // for (let i = 0; i < completedOrders.length; i++) {
-  //   string += `<div class="card" id="${i}">
-  //   <div class="card-header" id="heading${i}">
-  //     <h2 class="mb-0">
-  //       <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse${i}" aria-expanded="true" aria-controls="collapse${i}">
-  //         Order number ${completedOrders[i].order_id} by ${completedOrders[i].customer_name}
-  //       </button>
-  //     </h2>
-  //   </div>
+  string = `<h2 id="completed-orders-section">Completed orders</h2><div class="accordion" id="completed-orders-accordion">`;
+  for (let i = 0; i < completedOrders.length; i++) {
+    string +=
+    `<div class="card completed-card" id="${i}">
+    <div class="card-header" id="heading${i}">
+      <p class="mb-0">
+        <button class="btn" type="button" data-toggle="collapse" data-target="#collapse${i}" aria-expanded="true" aria-controls="collapse${i}">
+          <p>
+            Order number ${completedOrders[i].order_id} by ${completedOrders[i].customer_name} (${completedOrders[i].phone})
+          </p>
+        </button>
+      </p>
+    </div>
 
-  //   <div id="collapse${i}" class="collapse show" aria-labelledby="heading${i}" data-parent="#completed-orders-accordion">
-  //     <div class="card-body">
-  //       <ul>
-  //   `;
-  //   const order = completedOrders[i];
-  //   for (let j = 0; j < order.food_items.length; j++) {
-  //     string += `<li>${order.food_items[j].food_name}: ${order.food_items[j].quantity}</li>`;
-  //   }
-  //   string += `<button class="btn btn-primary pickedup" id="${i}">Picked Up</button></ul></div></div></div>`;
-  // }
+    <div id="collapse${i}" class="collapse show" aria-labelledby="heading${i}" data-parent="#completed-orders-accordion">
+      <div class="card-body">
+        <ul>
+    `;
+    const order = completedOrders[i];
+    for (let j = 0; j < order.food_items.length; j++) {
+      string += `<li>${order.food_items[j].food_name}: ${order.food_items[j].quantity}</li>`;
+    }
+    string += `</ul></div></div></div>`;
+  }
 
-  // $('#orders-container').append(string);
+  $('#orders-container').append(string);
   ///////////////////////////////////////
 
 
@@ -169,7 +173,7 @@ $(document).ready(function() {
     console.log(`clicked ${event.target.id}`);
     console.log(`order accepted: ${incomingOrders[event.target.id].order_id}`);
     //remove the drop down and button (form)
-    $(this).closest('form').remove();
+    $(this).closest('form').replaceWith(`<button class="btn btn-primary complete" id="${event.target.id}">Complete</button>`);
     //update accepted_at to order_id
     $.ajax(`/orders/${incomingOrders[event.target.id].order_id}/accept`, {
       method: "POST",
@@ -200,30 +204,37 @@ $(document).ready(function() {
     })
   });
 
-  // $('button.complete').on('click', function(event) {
-  //   console.log(`clicked ${event.target.id}`);
-  //   console.log(`order completed: ${acceptedOrders[event.target.id].order_id}`);
-  //   //update accepted_at to order_id
-  //   $.ajax(`/orders/${acceptedOrders[event.target.id].order_id}/complete`, {
-  //     method: "POST"
-  //   })
-  //   .then(function() {
-  //     console.log(`div#${event.target.id}.card`);
-  //     $(`div#${event.target.id}.card`).fadeOut("slow", function() {
-  //       event.stopPropagation();
-  //       const card = $(`div#${event.target.id}.card`).html();
-  //       console.log(card);
-  //       $('#completed-orders-accordion').append(card).fadeIn(3000);
-  //     });
-  //   })
-  //   .catch(err => {
-  //     console.log(err);
-  //   });
-  // });
+  $('button.complete').on('click', function(event) {
+    console.log(`clicked ${event.target.id}`);
+    console.log(`order completed: ${acceptedOrders[event.target.id].order_id}`);
+    //update accepted_at to order_id
+    $(this).remove();
+    $.ajax(`/orders/${acceptedOrders[event.target.id].order_id}/complete`, {
+      method: "POST"
+    })
+    .then(function() {
+      console.log(`div#${event.target.id}.card`);
+      $(`div#${event.target.id}.card.accepted-card`).fadeOut("slow", function() {
+        event.stopPropagation();
+        const $card = $(this);
+        console.log("card is: ");
+        console.log($card);
+        $('#completed-orders-accordion').append($card);
+        $card.fadeIn(3000);
+      });
+    })
+    .catch(err => {
+      console.log(err);
+    });
+  });
 
   $('.nav-item').on("click", function() {
     $('.nav-item').removeClass('active');
     $(this).addClass('active');
   });
+
+  $('a.completed-orders').on('click', function(event) {
+    console.log("clicked");
+  })
 
 });

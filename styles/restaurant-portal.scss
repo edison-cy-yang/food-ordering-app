@@ -5,7 +5,7 @@ body {
 
     padding: 20px;
     margin: 20px;
-    font-family: ‘Ibarra Real Nova’, serif;
+    font-family: 'Archivo Black', sans-serif;
     top: 30px;
     position: relative;
 
@@ -23,6 +23,8 @@ body {
           span {
             font-weight: bold;
             font-style: italic;
+            display: block;
+            text-align: left;
           }
         }
       }
@@ -71,6 +73,11 @@ body {
   nav.orders-nav {
     position: fixed;
     z-index: 1;
+  }
+
+  button.complete {
+    width: 110px;
+    height: 38px;
   }
 
 }

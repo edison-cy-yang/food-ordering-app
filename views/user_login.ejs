@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
     <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
     <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/login.css" type="text/css" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
     rel="stylesheet">
@@ -18,39 +19,44 @@
 
   <body>
     <%- include('./partials/_header') %>
-    <h2>Please log in or sign up!</h2>
-    <nav>
-      <div class="nav nav-tabs" id="nav-tab" role="tablist">
-        <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#customer-login" role="tab" aria-controls="nav-home" aria-selected="true">Customer</a>
-        <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#restaurant-login" role="tab" aria-controls="nav-profile" aria-selected="false">Restaurant</a>
-      </div>
-    </nav>
-    <div class="tab-content" id="login-tabContent">
-      <div class="tab-pane fade show active" id="customer-login" role="tabpanel" aria-labelledby="pills-home-tab">
-        <h3>Customer Login</h3>
-        <form class="customer-login" action="/customers/login" method="POST">
-          <div class="form-group mb-2">
-            <label for="email">Enter E-mail:</label>
-            <input class="form-control email" type="email" name="email">
-            <label for="password">Enter password:</label>
-            <input class="form-control password" type="password" name="password">
-            <button type="submit" class="btn btn-primary">Login</button>
+    <div class="main-login-content">
+      <div class="login-tab">
+        <div>
+          <nav>
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+              <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#customer-login" role="tab" aria-controls="nav-home" aria-selected="true">Customer</a>
+              <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#restaurant-login" role="tab" aria-controls="nav-profile" aria-selected="false">Restaurant</a>
+            </div>
+          </nav>
+        </div>
+        <div class="tab-content" id="login-tabContent">
+          <div class="tab-pane fade show active" id="customer-login" role="tabpanel" aria-labelledby="pills-home-tab">
+            <h4>Customer Login</h4>
+            <form class="customer-login" action="/customers/login" method="POST">
+              <div class="form-group mb-2">
+                <label for="email">Enter E-mail:</label>
+                <input class="form-control email" type="email" name="email">
+                <label for="password">Enter password:</label>
+                <input class="form-control password" type="password" name="password">
+                <button type="submit" class="btn btn-primary">Login</button>
+              </div>
+            </form>
+            <span class="missing-fields-error-message">Please fill out both the email and password</span>
+            <p>Don't have an account yet? <a href="/users/signup">Sign up</a></p>
           </div>
-        </form>
-        <span class="missing-fields-error-message">Please fill out both the email and password</span>
-        <p>Don't have an account yet? <a href="/users/signup">Sign up</a></p>
-      </div>
-      <div class="tab-pane fade" id="restaurant-login" role="tabpanel" aria-labelledby="pills-home-tab">
-        <h3>Restaurant Login</h3>
-        <form class="restaurant-login" action="/restaurants/login" method="POST">
-          <div class="form-group mb-2">
-            <label for="email">Enter E-mail:</label>
-            <input class="form-control" type="email" name="email">
-            <label for="password">Enter password:</label>
-            <input class="form-control" type="password" name="password">
-            <button type="submit" class="btn btn-primary">Login</button>
+          <div class="tab-pane fade" id="restaurant-login" role="tabpanel" aria-labelledby="pills-home-tab">
+            <h4>Restaurant Login</h4>
+            <form class="restaurant-login" action="/restaurants/login" method="POST">
+              <div class="form-group mb-2">
+                <label for="email">Enter E-mail:</label>
+                <input class="form-control" type="email" name="email">
+                <label for="password">Enter password:</label>
+                <input class="form-control" type="password" name="password">
+                <button type="submit" class="btn btn-primary">Login</button>
+              </div>
+            </form>
           </div>
-        </form>
+        </div>
       </div>
     </div>
     <script
