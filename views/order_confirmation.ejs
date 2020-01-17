@@ -5,16 +5,36 @@
 
     <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
     <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
-    <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="/styles/order-confirmation.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/header.css" type="/css" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Archivo+Black|Merriweather&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Ibarra+Real+Nova|Oswald&display=swap" rel="stylesheet">
 
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
-    <script type="text/javascript" src="/scripts/app.js"></script>
+    <script type="text/javascript" src="/scripts/order_confirmation.js"></script>
   </head>
 
   <body>
-    <h1>Order Confirmation</h1>
 
+      <%- include('./partials/_header') %>
+    <main>
+
+        <section class = "red-section shadow">
+            <span class = "invisible show1 caption2">Thank You!</span>
+            <span class = "invisible show1 caption1">Order Successfully Placed</span>
+            <div class="invisible show2 continue">
+            <span class = "show menu-text">Continue Shopping</span>
+            <a href="/restaurants/Five%20Guys"><i class="show material-icons cart">
+            shopping_cart
+            </i></a>
+          </div>
+       </section>
+
+
+    </main>
     <script
       src="https://code.jquery.com/jquery-3.4.1.min.js"
       integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="

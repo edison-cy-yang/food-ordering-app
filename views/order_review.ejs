@@ -7,6 +7,11 @@
     <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
     <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
     <link rel="stylesheet" href="/styles/order_review.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/header.css" type="text/css" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Archivo+Black|Merriweather&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Ibarra+Real+Nova|Oswald&display=swap" rel="stylesheet">
 
 
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
@@ -17,6 +22,8 @@
 
   <body>
       <%- include('./partials/_header') %>
+
+      <h1 class="review">Review Your Order</h1>
     <main>
 
       <div class="container">
@@ -29,17 +36,19 @@
             <li><strong>Estmated time</strong>: <%= order.est_time%> </li>
           </ul>
 
-
         </article>
         <article class="shadow">
 
-          <h2>My Iitems</h2>
+          <h2>My Items</h2>
 
-          <ul>
-            <% for(let key of order.food_items) { %>
-            <li class="num"> <span class="item"><%= key.name %></span><span class="numberCircle"><%= key.quantity %></span> </li>
-            <% } %>
-         </ul>
+          <div class="items">
+            <ul>
+              <% for(let key of order.food_items) { %>
+              <li class="num"> <span class="item"><%= key.name %></span><span class="numberCircle"><%= key.quantity %></span> </li>
+              <% } %>
+            </ul>
+          </div>
+
 
         </article>
       </div>
@@ -49,12 +58,13 @@
           <section class="summary-content">
             <ul>
               <li class="order-detail"> <strong>Total before tax</strong> : $<%= order.total%></li>
-              <li class="order-detail"> <strong>Estimated GST/HST</strong> : $<%= order.total*0.12%></li>
+              <li class="order-detail"> <strong>Estimated GST/HST</strong> : $<%= Math.round(order.total*0.12 * 100) / 100 %></li>
               <% const afTax = Number(order.total) + Number(order.total*0.12)%>
-              <li class="order-total"> <strong>Order Total</strong> : $<%= afTax %></li>
+
             </ul>
             <div class="checkout">
-                <form class="checkoutForm" method="GET" action="/restaurants/<%= order.restaurant_info.name %>">
+              <p class="total-amount"><strong>Order Total</strong> : $<%= afTax %></p>
+                <form class="checkoutForm" method="GET" action="/order_confirmation">
                   <button type="submit" class="btn btn-primary place-order">Place order</button>
                 </form>
             </div>
@@ -63,19 +73,7 @@
         </article>
       </div>
 
-
       </main>
-
-      <footer></footer>
-
-
-
-
-
-
-
-
-
     <script
       src="https://code.jquery.com/jquery-3.4.1.min.js"
       integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="

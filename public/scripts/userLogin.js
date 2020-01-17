@@ -10,4 +10,19 @@ $(document).ready(function() {
       $('form.customer-login').submit();
     }
   });
+
+  $(".logout").on("click", function(event) {
+    $.ajax({
+      url: "/customers/logout",
+      method: "POST",
+      success: function(data){console.log(data)},
+      failure: function(errMsg) {
+        alert(errMsg);
+      }
+    });
+    setTimeout(() => {
+      location.reload();
+     });
+   });
+
 });

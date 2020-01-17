@@ -1,5 +1,25 @@
 <link rel="stylesheet" href="/styles/header.css" type="text/css" />
 <header class="shadow-lg">
-  <a href="/"> <span>FOOD ORDERING</span></a>
+  <a class="home" href="/"> <span>FOOD ORDERING</span></a>
+  <% if(!user) {%>
+  <span class="get-started-link"><a href="/users/login">Get Started</a></span>
+  <% } else {%>
+    <div class="account">
+        <i class="material-icons">
+            portrait
+            </i>
+    <div class="dropdown show">
+        <a  href="#" class=" dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 
+            <%= user.name %>
+          </a>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <a class="dropdown-item logout" href="#">
+              Logout
+            </a>
+        </div>
+    </div>
+
+  </div>
+  <% }%>
 </header>
