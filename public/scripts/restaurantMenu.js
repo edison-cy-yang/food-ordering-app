@@ -126,8 +126,10 @@ $(document).ready(function() {
        alert(errMsg);
      }
    });
+   setTimeout(() => {
+    location.reload();
+   });
 
-   location.reload();
   });
 
 });

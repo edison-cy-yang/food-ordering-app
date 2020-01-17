@@ -23,7 +23,9 @@ $(document).ready(function() {
         alert(errMsg);
       }
     });
-    location.reload();
+    setTimeout(() => {
+      location.reload();
+     });
    });
 
 
