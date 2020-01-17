@@ -12,20 +12,20 @@ const dbFuncs = require('./databaseFuncs');
 const util = require('util');
 
 module.exports = (db) => {
-  router.get("/", (req, res) => {
-    let query = `SELECT * FROM widgets`;
-    console.log(query);
-    db.query(query)
-      .then(data => {
-        const widgets = data.rows;
-        res.json({ widgets });
-      })
-      .catch(err => {
-        res
-          .status(500)
-          .json({ error: err.message });
-      });
-  });
+  // router.get("/", (req, res) => {
+  //   let query = `SELECT * FROM widgets`;
+  //   console.log(query);
+  //   db.query(query)
+  //     .then(data => {
+  //       const widgets = data.rows;
+  //       res.json({ widgets });
+  //     })
+  //     .catch(err => {
+  //       res
+  //         .status(500)
+  //         .json({ error: err.message });
+  //     });
+  // });
 
   router.get("/:name", (req, res) => {
     if (!req.session.userId) {
@@ -46,10 +46,19 @@ module.exports = (db) => {
     })
     .then(foodItems => {
       templateVars["menu"] = foodItems;
+      const user_id = req.session.userId;
+      return database.getCustomerWithId(db, user_id);
+    })
+    .then(result => {
+      console.log("result here:", result.phone);
+      const user = result;
+      console.log("usr",result);
+      templateVars["user"] = result;
+      console.log("resulting tempVars", templateVars);
       res.render("restaurant_menu", templateVars);
     })
     .catch(err => {
-      res.status(500).send({error: "menu not available"});
+      res.status(500).send({error: err.message});
     });
   });
 
@@ -100,6 +109,7 @@ module.exports = (db) => {
       console.log(util.inspect(Object.values(map), {depth:null}));
       const groupedOrders = Object.values(map);
       const templateVars = {orders: groupedOrders};
+      templateVars["user"] = {name: "Five Guys"}
       res.render("restaurant_portal", templateVars);
     })
     .catch(err => {

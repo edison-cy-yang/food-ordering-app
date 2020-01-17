@@ -57,11 +57,20 @@ app.use("/users", usersRoutes(db, database));
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
 app.get("/", (req, res) => {
-  res.render("index");
+  const user_id = req.session.userId;
+  return database.getCustomerWithId(db, user_id)
+  .then(result => {
+    let user = result;
+    res.render("index",{ user });
+  })
 });
 
 let order;
 app.get("/order_review", (req, res) => {
+  if (!req.session.userId) {
+    res.redirect("/users/login");
+    return;
+  }
   const user_id = req.session.userId;
   order['customer_id']=user_id;
   const restaruant_id = order.restaurant_id;
@@ -69,11 +78,11 @@ app.get("/order_review", (req, res) => {
     .then(data => {
       const restaurant = data.rows[0];
       order['restaurant_info'] = restaurant;
-      console.log(order);
-      return Promise.resolve(order);
+      return database.getCustomerWithId(db, user_id);
       })
-      .then(order => {
-        res.render("order_review", { order });
+      .then(user => {
+        console.log( "LOOK HERE" + {order, user})
+        res.render("order_review", {order, user});
       })
       .catch(err => {
         res
@@ -92,7 +101,16 @@ app.post("/orders/new", (req, res) => {
   });
 
 app.get("/order_confirmation", (req, res) => {
-  res.render("order_confirmation");
+  if (!req.session.userId) {
+    res.redirect("/users/login");
+    return;
+  };
+  const user_id = req.session.userId;
+  return database.getCustomerWithId(db, user_id)
+  .then(result => {
+    let user = result;
+    res.render("order_confirmation",{ user });
+  })
 });
 
 app.post("/orders", (req, res) => {

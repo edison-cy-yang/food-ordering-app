@@ -11,11 +11,12 @@ const router  = express.Router();
 module.exports = (db, dbFuncs) => {
 
   router.get("/login", (req, res) => {
-   res.render("user_login");
-  });
-
-  router.get("/signup", (req, res) => {
-    res.render("user_signup");
+    const user_id = req.session.userId;
+    return dbFuncs.getCustomerWithId(db, user_id)
+    .then(result => {
+      const user = result
+      res.render("user_login",{ user });
+    })
   });
 
   router.post("/", (req, res) => {

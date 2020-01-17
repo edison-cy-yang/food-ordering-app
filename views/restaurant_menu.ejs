@@ -18,6 +18,7 @@
     <script type="text/javascript" src="../scripts/restaurantMenu.js"></script>
 
 
+
   </head>
 
   <body>
@@ -29,11 +30,11 @@
 
     <section class = "red-section shadow">
 
-      <span class = "caption1">Handcrafted</span>
-      <span class = "caption2">BURGERS & FRIES</span>
-      <span class = "caption1">since 1986</span>
-      <span class = "menu-text">MENU</span>
-      <a href="#menu"><i class="material-icons arrow-down">
+      <span class = "invisible show1 caption1">Handcrafted</span>
+      <span class = "invisible show2 caption2">BURGERS & FRIES</span>
+      <span class = "invisible show3 caption1">since 1986</span>
+      <span class = "invisible show4 menu-text">MENU</span>
+      <a href="#menu"><i class="invisible show4 material-icons arrow-down">
 keyboard_arrow_down
 </i></a>
      </section>
@@ -64,6 +65,59 @@ keyboard_arrow_down
           <% } %>
         </ul>
     </div>
+
+    <div  class = "menu-section">
+        <p class="category"> Beverages </p>
+        <ul>
+          <% for(let food of menu) { %>
+            <li>
+              <div class = "each-item">
+                <div class = "food-item">
+                <strong class="food-name"><%= food.name %></strong>
+                <em> $<%= food.price/100 %>.00</em>
+                <% if (food.is_popular) { %>
+                <span>🔥</span>
+                <% } %>
+                <p class="item-description"> <%= food.description %></p>
+              </div>
+                <div class="def-number-input number-input safari_only">
+                  <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" class="minus quant-button"></button>
+                  <input class="quantity <%= food.id %>" min="0" name="<%= food.id %>-quantity" value="0" type="number">
+                  <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus quant-button"></button>
+                </div>
+              </div>
+            </li>
+          <% } %>
+        </ul>
+    </div>
+
+
+
+
+    <div  class = "menu-section">
+        <p class="category"> Sides </p>
+        <ul>
+          <% for(let food of menu) { %>
+            <li>
+              <div class = "each-item">
+                <div class = "food-item">
+                <strong class="food-name"><%= food.name %></strong>
+                <em> $<%= food.price/100 %>.00</em>
+                <% if (food.is_popular) { %>
+                <span>🔥</span>
+                <% } %>
+                <p class="item-description"> <%= food.description %></p>
+              </div>
+                <div class="def-number-input number-input safari_only">
+                  <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" class="minus quant-button"></button>
+                  <input class="quantity <%= food.id %>" min="0" name="<%= food.id %>-quantity" value="0" type="number">
+                  <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus quant-button"></button>
+                </div>
+              </div>
+            </li>
+          <% } %>
+        </ul>
+    </div>
   </div>
   </div>
  </main>
@@ -72,7 +126,7 @@ keyboard_arrow_down
  <div class="cart">
 </div>
 <div class="buttons">
-  <a class="btn btn-primary checkout" href="/order_review">Checkout</a>
+  <a class="btn btn-primary checkout" href="/order_review">Proceed</a>
   </div>
 </div>
   <a class="btn btn-primary fixed-bottom open-cart"><i style="color:white;" class="material-icons cart-icon">

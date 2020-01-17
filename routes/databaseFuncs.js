@@ -136,11 +136,20 @@ const createLineItemsForOrder = (db, order_id, foodItems) => {
 
 exports.createLineItemsForOrder = createLineItemsForOrder;
 
-const getCustomerNameWithId = (db, customer_id) => {
-
+const getCustomerWithId = (db, user_id) => {
+  return db.query(`
+  SELECT customers.* FROM customers JOIN users ON (customers.user_id = users.id)
+  WHERE user_id = $1;`,[user_id])
+  .then(res => {
+    console.log("res rows from getcustomerwithid", res.rows[0])
+    return Promise.resolve(res.rows[0]);
+  })
+  .catch(err => {
+    console.log(err);
+  })
 }
 
-exports.getCustomerNameWithId = getCustomerNameWithId;
+exports.getCustomerWithId = getCustomerWithId;
 
 const getOrdersForRestaurantWithName = (db, restaurant_name) => {
   return db.query(`SELECT orders.*, customers.name as customer_name, customers.phone as phone, line_items.*, foods.name as food_name

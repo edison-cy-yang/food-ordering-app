@@ -1,0 +1,50 @@
+.red-section {
+  width: 100vw;
+  height: 100vh;
+  background: url(/images/red2.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+
+  .caption1 {
+    font-family: 'Merriweather', serif;
+    font-size: 40px;
+  }
+  .caption2 {
+    font-family: 'Archivo Black', sans-serif;
+    font-size:75px;
+  }
+  .menu-text {
+    font-size: 20px;
+  }
+}
+
+.continue {
+  margin-top: 60px;
+  height:70px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  .cart{
+    margin-top: 10px;
+    color: white;
+    font-size: 40px;
+  }
+  .cart:hover {
+    font-size:50px;
+    transition: all 0.5s;
+  }
+}
+
+.invisible {
+  opacity:0;
+}
+
+.show1, .show2 {
+  transition: all 2s;
+}
