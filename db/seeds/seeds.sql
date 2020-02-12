@@ -1,11 +1,11 @@
 INSERT INTO users (email, password)
-VALUES ('edison.cy.yang@gmail.com', '$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.'),
+VALUES ('jolanga@naver.com', '$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.'),
 ('tim@gmail.com', '$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.'),
 ('jim@gmail.com', '$2a$10$FB/BOAVhpuLvpOREQVmvmezD4ED/.JBIDRh70tGevYzYzQgFId2u.');
 
 
 INSERT INTO customers (user_id, name, phone)
-VALUES (1, 'edison', '6047236218'),
+VALUES (1, 'Jay Seo', '7786809238'),
 (2, 'tim', '6047236218'),
 (3, 'jim', '6040000000');
 
@@ -31,7 +31,7 @@ INSERT INTO restaurants (
   'Vancouver',
   'BC',
   'V6B 5J3',
-  '604-685-1585',
+  '778-680-9238',
   '11a.m.-10p.m.',
   'Fast food restaurant'
 ),

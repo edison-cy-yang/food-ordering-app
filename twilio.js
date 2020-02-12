@@ -7,7 +7,7 @@ const sendRestaurantMessage = function() {
     .create({
       body: "Hi there, a customer has placed an order. Please head over to Restaurant Portal to accept and provide estimated wait time",
       from: twilio.phoneNumber,
-      to: "+16047236218"
+      to: "+17786809238"
     })
     .then(message => console.log("message id: " + message.sid))
     .catch(err => {
